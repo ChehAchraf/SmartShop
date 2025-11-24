@@ -1,4 +1,4 @@
-package com.ecomm.smartshop.identity;
+package com.ecomm.smartshop.identity.entity;
 
 import com.ecomm.smartshop.shared.enums.UserRole;
 import jakarta.persistence.*;

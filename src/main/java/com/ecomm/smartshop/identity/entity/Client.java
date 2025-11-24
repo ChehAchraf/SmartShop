@@ -1,5 +1,6 @@
-package com.ecomm.smartshop.identity;
+package com.ecomm.smartshop.identity.entity;
 
+import com.ecomm.smartshop.customer.enums.CustomerTier;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
