@@ -3,6 +3,7 @@ package com.ecomm.smartshop.sales.entity;
 
 import com.ecomm.smartshop.sales.enums.OrderStatus;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Pattern;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -32,6 +33,11 @@ public class Commande {
     @Builder.Default
     private OrderStatus statut = OrderStatus.PENDING;
 
+    @Enumerated(EnumType.STRING)
+    @Builder.Default
+    private OrderStatus orderStatus = OrderStatus.PENDING;
 
+    @Pattern(regexp = "PROMO-[A-Z0-9]{4}", message = "the promo code must be like this PROMO-XXXX")
+    private String codePromo;
 
 }
