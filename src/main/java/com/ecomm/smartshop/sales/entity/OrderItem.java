@@ -32,6 +32,10 @@ public class OrderItem {
     @JoinColumn(name = "product_id",nullable = false)
     private Product product;
 
+    @ManyToOne
+    @JoinColumn(name = "commande_id") // Foreign Key
+    private Commande commande;
+
     @PrePersist
     @PreUpdate
     public void calculerTotal(){
