@@ -1,4 +1,4 @@
-package com.ecomm.smartshop.identity;
+package com.ecomm.smartshop.identity.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
@@ -10,8 +10,8 @@ import lombok.experimental.SuperBuilder;
 @Getter
 @Setter
 @SuperBuilder
-@NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
+
 public class Admin extends User{
 }
