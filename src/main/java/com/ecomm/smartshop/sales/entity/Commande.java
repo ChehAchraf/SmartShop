@@ -1,6 +1,7 @@
 package com.ecomm.smartshop.sales.entity;
 
 
+import com.ecomm.smartshop.billing.entity.Paiement;
 import com.ecomm.smartshop.identity.entity.Client;
 import com.ecomm.smartshop.sales.enums.OrderStatus;
 import jakarta.persistence.*;
@@ -74,5 +75,7 @@ public class Commande {
     @Builder.Default
     private List<OrderItem> items = new ArrayList<>();
 
+    @OneToMany(mappedBy = "commande", cascade = CascadeType.ALL)
+    private List<Paiement> paiements = new ArrayList<>();
 
 }
