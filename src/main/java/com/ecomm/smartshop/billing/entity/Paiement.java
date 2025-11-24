@@ -1,8 +1,12 @@
 package com.ecomm.smartshop.billing.entity;
 
 import com.ecomm.smartshop.billing.enums.PaymentMethod;
+import com.ecomm.smartshop.billing.enums.PaymentStatus;
+import com.ecomm.smartshop.sales.entity.Commande;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "paiements")
@@ -30,4 +34,15 @@ public class Paiement {
     @Column(nullable = false)
     @Builder.Default
     private PaymentStatus statut = PaymentStatus.EN_ATTENTE;
+
+    @Column(nullable = false)
+    private LocalDateTime datePaiement;
+
+    private LocalDateTime dateEncaissement;
+
+    private String reference;
+
+    @ManyToOne
+    @JoinColumn(name = "commande_id", nullable = false)
+    private Commande commande;
 }
