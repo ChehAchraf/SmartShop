@@ -1,9 +1,12 @@
 package com.ecomm.smartshop.catalog.entity;
 
+import com.ecomm.smartshop.sales.entity.OrderItem;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.SQLRestriction;
+
+import java.util.List;
 
 @Entity
 @Table(name = "products")
@@ -34,4 +37,6 @@ public class Product {
     @Column(nullable = false)
     @Builder.Default
     private Boolean isDeleted = false;
+
+
 }
