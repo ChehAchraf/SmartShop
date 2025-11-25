@@ -9,10 +9,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 @RestController
@@ -26,6 +23,11 @@ public class ProductController {
                                                    HttpSession session){
         verifierAdmin(session);
         return ResponseEntity.status(HttpStatus.CREATED).body(service.createProduct(request));
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<ProductResponse> find(@PathVariable Long id){
+        return ResponseEntity.status(HttpStatus.FOUND).body(service.getProductById(id));
     }
 
 

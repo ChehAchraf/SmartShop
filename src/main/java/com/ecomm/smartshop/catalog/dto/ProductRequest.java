@@ -7,7 +7,7 @@ import jakarta.validation.constraints.Positive;
 
 public record ProductRequest(
         @NotBlank(message = "the product name is required")
-        String name,
+        String nom,
 
         String description,
 
