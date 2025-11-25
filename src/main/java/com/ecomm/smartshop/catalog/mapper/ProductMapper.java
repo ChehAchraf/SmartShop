@@ -10,7 +10,7 @@ import org.mapstruct.MappingTarget;
 @Mapper(componentModel = "spring")
 public interface ProductMapper {
 
-    ProductResponse toResponse(ProductRequest request);
+    ProductResponse toResponse(Product product);
 
     @Mapping(target = "id",ignore = true)
     @Mapping(target = "isDeleted",constant = "false")
