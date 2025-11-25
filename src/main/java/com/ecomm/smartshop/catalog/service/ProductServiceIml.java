@@ -6,6 +6,7 @@ import com.ecomm.smartshop.catalog.entity.Product;
 import com.ecomm.smartshop.catalog.mapper.ProductMapper;
 import com.ecomm.smartshop.catalog.repository.ProductRepository;
 import com.ecomm.smartshop.catalog.service.interfaces.ProductService;
+import com.ecomm.smartshop.shared.exception.customized.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -38,7 +39,7 @@ public class ProductServiceIml implements ProductService {
     @Override
     public ProductResponse getProductById(Long id) {
         return repository.findById(id).map(mapper::toResponse)
-                .orElseThrow(()->new RuntimeException("no product was found"));
+                .orElseThrow(()->new ResourceNotFoundException("no product was found"));
     }
 
     @Override
