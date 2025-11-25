@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -28,17 +29,21 @@ public class ProductServiceIml implements ProductService {
 
     @Override
     public ProductResponse updateProduct(Long id, ProductRequest request) {
-        return null;
+        Product extistingProduct = repository.findById(id)
+                .orElseThrow(()-> new RuntimeException("no product"));
+        mapper.updateEntityFromRequest(request,extistingProduct);
     }
 
     @Override
     public ProductResponse getProductById(Long id) {
-        Product
+        return repository.findById(id).map(mapper::toResponse)
+                .orElseThrow(()->new RuntimeException("no product was found"));
     }
 
     @Override
     public List<ProductResponse> getAllProducts() {
-        return List.of();
+        return repository.findAll().stream().map(mapper::toResponse)
+                .collect(Collectors.toList());
     }
 
     @Override
