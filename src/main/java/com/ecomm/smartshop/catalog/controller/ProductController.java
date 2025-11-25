@@ -25,6 +25,7 @@ public class ProductController {
     public ResponseEntity<ProductResponse> create (@RequestBody @Valid ProductRequest request,
                                                    HttpSession session){
         verifierAdmin(session);
+        return ResponseEntity.status(HttpStatus.CREATED).body(service.createProduct(request));
     }
 
 
