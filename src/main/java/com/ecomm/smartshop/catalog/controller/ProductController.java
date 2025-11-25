@@ -26,7 +26,9 @@ public class ProductController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ProductResponse> find(@PathVariable Long id){
+    public ResponseEntity<ProductResponse> find(@PathVariable Long id,
+                                                HttpSession session){
+        verifierAdmin(session);
         return ResponseEntity.status(HttpStatus.FOUND).body(service.getProductById(id));
     }
 
