@@ -32,6 +32,7 @@ public class ProductServiceIml implements ProductService {
         Product extistingProduct = repository.findById(id)
                 .orElseThrow(()-> new RuntimeException("no product"));
         mapper.updateEntityFromRequest(request,extistingProduct);
+        return mapper.toResponse(repository.save(extistingProduct));
     }
 
     @Override
