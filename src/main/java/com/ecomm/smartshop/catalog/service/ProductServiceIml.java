@@ -48,6 +48,9 @@ public class ProductServiceIml implements ProductService {
 
     @Override
     public void deleteProduct(Long id) {
-
+        if (!repository.existsById(id)){
+            throw new RuntimeException("the product is not found");
+        }
+        repository.deleteById(id);
     }
 }
