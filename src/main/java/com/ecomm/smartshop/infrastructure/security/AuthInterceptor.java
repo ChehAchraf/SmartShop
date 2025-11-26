@@ -6,7 +6,10 @@ import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
+import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
+
+import com.ecomm.smartshop.shared.enums.UserRole;
 
 @Component
 public class AuthInterceptor implements HandlerInterceptor {
@@ -26,6 +29,23 @@ public class AuthInterceptor implements HandlerInterceptor {
         if (session == null || session.getAttribute("USER_ID") == null) {
             response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Vous devez vous connecter");
             return false;
+        }
+
+        if (handler instanceof HandlerMethod) {
+            HandlerMethod handlerMethod = (HandlerMethod) handler;
+            
+            RequireRole requiredRoleAnnotation = handlerMethod.getMethodAnnotation(RequireRole.class);
+
+            if (requiredRoleAnnotation != null) {
+                UserRole requiredRole = requiredRoleAnnotation.value(); 
+                UserRole currentRole = (UserRole) session.getAttribute("USER_ROLE"); 
+
+                if (currentRole != requiredRole) {
+                    response.sendError(HttpServletResponse.SC_FORBIDDEN, "Accès refusé: Vous n'avez pas les droits nécessaires");
+                    return false; 
+                }
+        
+            }
         }
         return true;
 
