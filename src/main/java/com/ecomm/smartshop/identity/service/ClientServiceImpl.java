@@ -8,6 +8,7 @@ import com.ecomm.smartshop.identity.repository.ClientRepository;
 import com.ecomm.smartshop.identity.repository.UserRepository;
 import com.ecomm.smartshop.identity.service.interfaces.ClientService;
 import com.ecomm.smartshop.shared.enums.UserRole;
+import com.ecomm.smartshop.shared.exception.customized.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -57,11 +58,15 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     public ClientResponse getMyProfile(Long userId) {
-        return null;
+        Client client = clientRepository.findById(userId)
+                .orElseThrow(()-> new ResourceNotFoundException("profile not found"));
+        return clientMapper.toResponse(client);
     }
 
     @Override
     public ClientResponse getClientById(Long id) {
-        return null;
+        Client client = clientRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("client not found"));
+        return clientMapper.toResponse(client);
     }
 }
