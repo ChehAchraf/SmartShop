@@ -2,9 +2,12 @@ package com.ecomm.smartshop.identity.service;
 
 import com.ecomm.smartshop.identity.dto.ClientRequest;
 import com.ecomm.smartshop.identity.dto.ClientResponse;
+import com.ecomm.smartshop.identity.entity.Client;
+import com.ecomm.smartshop.identity.mapper.ClientMapper;
 import com.ecomm.smartshop.identity.repository.ClientRepository;
 import com.ecomm.smartshop.identity.repository.UserRepository;
 import com.ecomm.smartshop.identity.service.interfaces.ClientService;
+import com.ecomm.smartshop.shared.enums.UserRole;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -15,10 +18,20 @@ import java.util.List;
 public class ClientServiceImpl implements ClientService {
     private final ClientRepository clientRepository;
     private final UserRepository userRepository;
+    private final ClientMapper clientMapper;
 
     @Override
     public ClientResponse createClient(ClientRequest request) {
-        return null;
+
+        if (userRepository.existsByUsername(request.email())){
+            throw new RuntimeException("Email already exists");
+        }
+        Client client = clientMapper.toEntity(request);
+        client.setUsername(request.email());
+        client.setRole(UserRole.CLIENT);
+        client.setPassword(request.password());
+
+        return clientMapper.toResponse(clientRepository.save(client));
     }
 
     @Override
