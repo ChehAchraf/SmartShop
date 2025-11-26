@@ -12,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -49,7 +50,9 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     public List<ClientResponse> getAllCLients() {
-        return List.of();
+        return clientRepository.findAll().stream()
+                .map(clientMapper::toResponse)
+                .collect(Collectors.toList());
     }
 
     @Override
