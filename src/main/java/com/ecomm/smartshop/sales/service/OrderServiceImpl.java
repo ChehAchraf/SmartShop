@@ -14,6 +14,7 @@ import com.ecomm.smartshop.sales.enums.OrderStatus;
 import com.ecomm.smartshop.sales.mapper.OrderMapper;
 import com.ecomm.smartshop.sales.repository.OrderRepository;
 import com.ecomm.smartshop.sales.service.interfaces.OrederService;
+import com.ecomm.smartshop.shared.exception.customized.BusinessException;
 import com.ecomm.smartshop.shared.exception.customized.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -96,9 +97,9 @@ public class OrderServiceImpl implements OrederService {
 
     @Override
     public OrderResponse getOrderById(Long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getOrderById'");
-    }
+        return orderRepository.findById(id)
+                .map(orderMapper::toResponse)
+                .orElseThrow(() -> new ResourceNotFoundException("commande not found"));    }
 
     @Override
     public List<OrderResponse> getMyOrders(Long clientId) {
