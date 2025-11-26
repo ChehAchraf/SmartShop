@@ -1,12 +1,12 @@
-package com.ecomm.smartshop.identity.service;
+package com.ecomm.smartshop.customer.service;
 
-import com.ecomm.smartshop.identity.dto.ClientRequest;
-import com.ecomm.smartshop.identity.dto.ClientResponse;
+import com.ecomm.smartshop.customer.dto.ClientRequest;
+import com.ecomm.smartshop.customer.dto.ClientResponse;
 import com.ecomm.smartshop.identity.entity.Client;
-import com.ecomm.smartshop.identity.mapper.ClientMapper;
+import com.ecomm.smartshop.customer.mapper.ClientMapper;
 import com.ecomm.smartshop.identity.repository.ClientRepository;
 import com.ecomm.smartshop.identity.repository.UserRepository;
-import com.ecomm.smartshop.identity.service.interfaces.ClientService;
+import com.ecomm.smartshop.customer.service.interfaces.ClientService;
 import com.ecomm.smartshop.shared.enums.UserRole;
 import com.ecomm.smartshop.shared.exception.customized.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
