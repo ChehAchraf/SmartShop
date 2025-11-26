@@ -1,5 +1,6 @@
 package com.ecomm.smartshop.shared.exception;
 
+import com.ecomm.smartshop.shared.exception.customized.BusinessException;
 import com.ecomm.smartshop.shared.exception.customized.ResourceNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
@@ -55,7 +56,17 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
     }
 
-
+    @ExceptionHandler(BusinessException.class)
+    public ResponseEntity<ErrorResponse> handlebusinessException(BusinessException ex, HttpServletRequest request){
+        ErrorResponse error = new ErrorResponse(
+                LocalDateTime.now(),
+                HttpStatus.UNPROCESSABLE_ENTITY.value(),
+                "Business Rule Violation",
+                ex.getMessage(),
+                request.getRequestURI()
+        );
+        return new ResponseEntity<>(error, HttpStatus.UNPROCESSABLE_ENTITY);
+    }
 
 
 }

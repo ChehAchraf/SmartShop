@@ -3,9 +3,7 @@ package com.ecomm.smartshop.customer.mapper;
 import com.ecomm.smartshop.customer.dto.ClientRequest;
 import com.ecomm.smartshop.customer.dto.ClientResponse;
 import com.ecomm.smartshop.identity.entity.Client;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.MappingTarget;
+import org.mapstruct.*;
 
 @Mapper(componentModel = "spring")
 public interface ClientMapper {
@@ -23,6 +21,7 @@ public interface ClientMapper {
     @Mapping(target = "id",ignore = true)
     @Mapping(target = "role",ignore = true)
     @Mapping(target = "username",ignore = true)
+    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     void updateEntityFromRequest(ClientRequest request, @MappingTarget Client client);
 
 }
