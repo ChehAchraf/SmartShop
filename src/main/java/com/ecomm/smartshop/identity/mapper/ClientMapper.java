@@ -1,7 +1,5 @@
 package com.ecomm.smartshop.identity.mapper;
 
-import com.ecomm.smartshop.identity.dto.ClientRequest;
-import com.ecomm.smartshop.identity.dto.ClientResponse;
 import com.ecomm.smartshop.identity.entity.Client;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

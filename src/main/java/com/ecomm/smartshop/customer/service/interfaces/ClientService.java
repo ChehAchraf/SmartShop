@@ -1,7 +1,7 @@
-package com.ecomm.smartshop.identity.service.interfaces;
+package com.ecomm.smartshop.customer.service.interfaces;
 
-import com.ecomm.smartshop.identity.dto.ClientRequest;
-import com.ecomm.smartshop.identity.dto.ClientResponse;
+import com.ecomm.smartshop.customer.dto.ClientRequest;
+import com.ecomm.smartshop.customer.dto.ClientResponse;
 
 import java.util.List;
 
