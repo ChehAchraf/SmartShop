@@ -41,7 +41,10 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     public void deleteClient(Long id) {
+        Client clientToDelete = clientRepository.findById(id)
+                .orElseThrow(()->new RuntimeException("User is not found"));
 
+        clientRepository.delete(clientToDelete);
     }
 
     @Override
