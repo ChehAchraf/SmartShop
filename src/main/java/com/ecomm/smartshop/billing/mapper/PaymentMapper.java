@@ -3,8 +3,10 @@ package com.ecomm.smartshop.billing.mapper;
 import com.ecomm.smartshop.billing.dto.PaymentRequest;
 import com.ecomm.smartshop.billing.dto.PaymentResponse;
 import com.ecomm.smartshop.billing.entity.Paiement;
+import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
+@Mapper(componentModel = "spring")
 public interface PaymentMapper {
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "numeroPaiement", ignore = true)
