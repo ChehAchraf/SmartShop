@@ -4,6 +4,7 @@ import com.ecomm.smartshop.infrastructure.security.RequireRole;
 import com.ecomm.smartshop.sales.dto.CreateOrderRequest;
 import com.ecomm.smartshop.sales.dto.OrderResponse;
 import com.ecomm.smartshop.sales.service.OrderServiceImpl;
+import com.ecomm.smartshop.sales.service.interfaces.OrederService;
 import com.ecomm.smartshop.shared.enums.UserRole;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
@@ -17,8 +18,9 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("/api/orders")
 public class OrderController {
-    private final OrderServiceImpl service;
+    private final OrederService service;
 
     @PostMapping
     @RequireRole(UserRole.ADMIN)
