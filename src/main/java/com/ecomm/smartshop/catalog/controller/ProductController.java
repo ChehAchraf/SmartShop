@@ -3,6 +3,7 @@ package com.ecomm.smartshop.catalog.controller;
 import com.ecomm.smartshop.catalog.dto.ProductRequest;
 import com.ecomm.smartshop.catalog.dto.ProductResponse;
 import com.ecomm.smartshop.catalog.service.interfaces.ProductService;
+import com.ecomm.smartshop.infrastructure.security.RequireRole;
 import com.ecomm.smartshop.shared.enums.UserRole;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
@@ -30,6 +31,25 @@ public class ProductController {
                                                 HttpSession session){
         verifierAdmin(session);
         return ResponseEntity.status(HttpStatus.FOUND).body(service.getProductById(id));
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<ProductResponse> getProductById(@PathVariable Long id) {
+        return ResponseEntity.ok(service.getProductById(id));
+    }
+    @PutMapping("/{id}")
+    @RequireRole(UserRole.ADMIN)
+    public ResponseEntity<ProductResponse> updateProduct(
+            @PathVariable Long id,
+            @RequestBody @Valid ProductRequest request) {
+        return ResponseEntity.ok(service.updateProduct(id, request));
+    }
+
+    @DeleteMapping("/{id}")
+    @RequireRole(UserRole.ADMIN)
+    public ResponseEntity<Void> deleteProduct(@PathVariable Long id) {
+        service.deleteProduct(id);
+        return ResponseEntity.noContent().build();
     }
 
 
