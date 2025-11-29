@@ -45,6 +45,11 @@ public class ClientController {
         clientService.deleteClient(id); 
         return ResponseEntity.noContent().build(); 
     }
+    @GetMapping("/{id}")
+    @RequireRole(UserRole.ADMIN)
+    public ResponseEntity<ClientResponse> getClientById(@PathVariable Long id) {
+        return ResponseEntity.ok(clientService.getClientById(id));
+    }
 
     @GetMapping
     @RequireRole(UserRole.ADMIN)

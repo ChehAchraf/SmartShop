@@ -123,7 +123,7 @@ public class OrderServiceImpl implements OrederService {
     @Override
     @RequireRole(UserRole.ADMIN)
     public void updateOrderStatus(Long orderId) {
-        // TODO Auto-generated method stub
+
         throw new UnsupportedOperationException("Unimplemented method 'updateOrderStatus'");
     }
 

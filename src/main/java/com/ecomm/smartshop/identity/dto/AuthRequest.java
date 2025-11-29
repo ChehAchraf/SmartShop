@@ -1,6 +1,5 @@
 package com.ecomm.smartshop.identity.dto;
 
-import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 
 public record AuthRequest(

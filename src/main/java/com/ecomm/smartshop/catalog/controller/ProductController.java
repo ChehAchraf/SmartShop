@@ -26,12 +26,12 @@ public class ProductController {
         return ResponseEntity.status(HttpStatus.CREATED).body(service.createProduct(request));
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<ProductResponse> find(@PathVariable Long id,
-                                                HttpSession session){
-        verifierAdmin(session);
-        return ResponseEntity.status(HttpStatus.FOUND).body(service.getProductById(id));
-    }
+//    @GetMapping("/{id}")
+//    public ResponseEntity<ProductResponse> find(@PathVariable Long id,
+//                                                HttpSession session){
+//        verifierAdmin(session);
+//        return ResponseEntity.status(HttpStatus.FOUND).body(service.getProductById(id));
+//    }
 
     @GetMapping("/{id}")
     public ResponseEntity<ProductResponse> getProductById(@PathVariable Long id) {

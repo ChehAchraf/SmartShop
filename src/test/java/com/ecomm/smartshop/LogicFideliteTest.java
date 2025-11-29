@@ -5,7 +5,7 @@ import com.ecomm.smartshop.identity.entity.Client;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class LogicFideliteTest {
+class LogicFideliteTest {
     @Test
     void testUpgradeToSilver(){
         Client client = Client.builder()

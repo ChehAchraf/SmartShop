@@ -4,7 +4,7 @@ import com.ecomm.smartshop.catalog.entity.Product;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.List;
+
 
 @Entity
 @Table(name = "order_items")

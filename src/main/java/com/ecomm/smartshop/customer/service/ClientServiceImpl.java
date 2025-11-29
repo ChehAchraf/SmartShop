@@ -8,6 +8,7 @@ import com.ecomm.smartshop.identity.repository.ClientRepository;
 import com.ecomm.smartshop.identity.repository.UserRepository;
 import com.ecomm.smartshop.customer.service.interfaces.ClientService;
 import com.ecomm.smartshop.shared.enums.UserRole;
+import com.ecomm.smartshop.shared.exception.customized.BusinessException;
 import com.ecomm.smartshop.shared.exception.customized.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -26,7 +27,7 @@ public class ClientServiceImpl implements ClientService {
     public ClientResponse createClient(ClientRequest request) {
 
         if (userRepository.existsByUsername(request.email())){
-            throw new RuntimeException("Email already exists");
+            throw new BusinessException("Email already exists");
         }
         Client client = clientMapper.toEntity(request);
         client.setUsername(request.email());
@@ -53,7 +54,7 @@ public class ClientServiceImpl implements ClientService {
     public List<ClientResponse> getAllCLients() {
         return clientRepository.findAll().stream()
                 .map(clientMapper::toResponse)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     @Override

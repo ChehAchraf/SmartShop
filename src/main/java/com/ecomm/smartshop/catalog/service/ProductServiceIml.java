@@ -11,7 +11,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -45,13 +44,13 @@ public class ProductServiceIml implements ProductService {
     @Override
     public List<ProductResponse> getAllProducts() {
         return repository.findAll().stream().map(mapper::toResponse)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     @Override
     public void deleteProduct(Long id) {
         if (!repository.existsById(id)){
-            throw new RuntimeException("the product is not found");
+            throw new ResourceNotFoundException("the product is not found");
         }
         repository.deleteById(id);
     }

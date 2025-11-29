@@ -4,6 +4,7 @@ import com.ecomm.smartshop.identity.dto.AuthRequest;
 import com.ecomm.smartshop.identity.dto.AuthResponse;
 import com.ecomm.smartshop.identity.entity.User;
 import com.ecomm.smartshop.identity.repository.UserRepository;
+import com.ecomm.smartshop.shared.exception.customized.BusinessException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -14,10 +15,10 @@ public class AuthService {
 
     public AuthResponse login(AuthRequest request){
         User user = userRepository.findByUsername(request.username())
-                    .orElseThrow(()-> new RuntimeException("username or password is incorrect"));
+                    .orElseThrow(()-> new BusinessException("username or password is incorrect"));
 
         if(!user.getPassword().equals(request.password())){
-            throw new RuntimeException("username or password is incorrect");
+            throw new BusinessException("username or password is incorrect");
         }
         return new AuthResponse(user.getId(), user.getUsername(), user.getRole());
     }
