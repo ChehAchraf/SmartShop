@@ -54,17 +54,17 @@ public class OrderServiceImpl implements OrederService {
             Product product = productRepository.findById(itemRequest.productId())
                     .orElseThrow(() -> new ResourceNotFoundException("Produit introuvable: " + itemRequest.productId()));
 
-            if (product.getStockDisponible() < itemRequest.quantity()) {
+            if (product.getStockDisponible() < itemRequest.quantite()) {
                 throw new BusinessException("Stock insuffisant pour le produit: " + product.getNom());
             }
 
-            product.setStockDisponible(product.getStockDisponible() - itemRequest.quantity());
+            product.setStockDisponible(product.getStockDisponible() - itemRequest.quantite());
             productRepository.save(product);
 
 
             OrderItem orderItem = OrderItem.builder()
                     .product(product)
-                    .quantite(itemRequest.quantity())
+                    .quantite(itemRequest.quantite())
                     .prixUnitaire(product.getPrixUnitaire())
                     .commande(commande)
                     .build();
