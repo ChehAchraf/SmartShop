@@ -5,6 +5,7 @@ import com.ecomm.smartshop.catalog.repository.ProductRepository;
 import com.ecomm.smartshop.customer.enums.CustomerTier;
 import com.ecomm.smartshop.identity.entity.Client;
 import com.ecomm.smartshop.identity.repository.ClientRepository;
+import com.ecomm.smartshop.infrastructure.security.RequireRole;
 import com.ecomm.smartshop.sales.dto.CreateOrderRequest;
 import com.ecomm.smartshop.sales.dto.OrderItemRequest;
 import com.ecomm.smartshop.sales.dto.OrderResponse;
@@ -14,6 +15,8 @@ import com.ecomm.smartshop.sales.enums.OrderStatus;
 import com.ecomm.smartshop.sales.mapper.OrderMapper;
 import com.ecomm.smartshop.sales.repository.OrderRepository;
 import com.ecomm.smartshop.sales.service.interfaces.OrederService;
+import com.ecomm.smartshop.shared.enums.UserRole;
+import com.ecomm.smartshop.shared.exception.customized.BusinessException;
 import com.ecomm.smartshop.shared.exception.customized.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -95,24 +98,30 @@ public class OrderServiceImpl implements OrederService {
     }
 
     @Override
+    @RequireRole(UserRole.ADMIN)
     public OrderResponse getOrderById(Long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getOrderById'");
-    }
+        return orderRepository.findById(id)
+                .map(orderMapper::toResponse)
+                .orElseThrow(() -> new ResourceNotFoundException("commande not found"));    }
 
     @Override
+    @RequireRole(UserRole.CLIENT)
     public List<OrderResponse> getMyOrders(Long clientId) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getMyOrders'");
+        return orderRepository.findByClientId(clientId).stream()
+                .map(orderMapper::toResponse)
+                .toList();
     }
 
     @Override
+    @RequireRole(UserRole.ADMIN)
     public List<OrderResponse> getAllOrders() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getAllOrders'");
+        return orderRepository.findAll().stream()
+                .map(orderMapper::toResponse)
+                .toList();
     }
 
     @Override
+    @RequireRole(UserRole.ADMIN)
     public void updateOrderStatus(Long orderId) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'updateOrderStatus'");
