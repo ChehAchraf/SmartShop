@@ -67,6 +67,5 @@ public class ClientController {
         return ResponseEntity.ok(clientService.getMyProfile(userId));
     }
 
-   
     
 }

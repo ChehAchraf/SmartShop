@@ -22,9 +22,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -143,6 +142,21 @@ public class OrderServiceImpl implements OrederService {
             return sousTotal * 0.05;
         }
         return 0.0;
+    }
+
+    public List<Map<String, Long>> getorderitems(){
+        return  orderRepository.findAll()
+                .stream()
+                .collect(Collectors.groupingBy(Commande::getStatut,Collectors.counting()))
+                .entrySet().stream()
+                .map(command->{
+                    Map<String,Long> map = new HashMap<>();
+                    map.put(command.getKey().name(),command.getValue());
+                    return map;
+                }).toList();
+
+
+
     }
 
 }

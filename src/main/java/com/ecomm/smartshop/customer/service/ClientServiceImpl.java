@@ -70,4 +70,5 @@ public class ClientServiceImpl implements ClientService {
                 .orElseThrow(() -> new ResourceNotFoundException("client not found"));
         return clientMapper.toResponse(client);
     }
+
 }
